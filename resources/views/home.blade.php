@@ -15,7 +15,8 @@
                     <th scope="col">Количество</th>
                     <th scope="col">Итого</th>
                     <th scope="col">Адрес</th>
-                    <th scope="col">Статус</th>
+                    <th scope="col">Статус оплаты</th>
+                    <th scope="col">Статус заказа</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -26,6 +27,20 @@
                             <td>{{ $order->quantity }}</td>
                             <td>{{ $order->amount }}</td>
                             <td>{{ $order->address }}</td>
+                            @switch($order->status_payment)
+                                @case("WAITING")
+                                    <td>Счет выставлен, ожидает оплаты</td>
+                                    @break
+                                @case("PAID")
+                                    <td>Счет оплачен</td>
+                                    @break
+                                @case("REJECTED")
+                                    <td>Счет отклонен</td>
+                                    @break
+                                @case("EXPIRED")
+                                    <td>Время жизни счета истекло. Счет не оплачен</td>
+                                    @break
+                            @endswitch
                             @switch($order->status)
                                 @case("open")
                                     <td>Заказ сделан на сайте, ожидает подтверждение менеджера</td>

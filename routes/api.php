@@ -19,3 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('/add-order', 'OrderController@addOrder');
+
+Route::post('/update-status-payment', 'OrderController@updateStatusPayment');
